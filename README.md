@@ -1,4 +1,5 @@
 # BDD Behave Test Examples
+Ready for CI/CD with circleci, see .circleci/config.yaml
 
 ## Clone the repo
 
@@ -31,11 +32,14 @@ Available envvars include:
 ### Run test and display anything sent to stdout
 	behave --no-capture main/features/tests/user_profile.feature
 
-### Run test and display debug logging
+### Run test and display debug logging (output will be very detailed)
     behave --logging-level=DEBUG --no-logcapture main/features/tests/user_profile.feature
 
-### Run test matching a tag, ex: @smoke tags the tests of all our certified 2019 measures
-    behave --tags=@smoke --logging-level=DEBUG --no-logcapture main/features/tests/user_profile.feature
+### Run test and display info logging (output will be minimal)
+    behave --logging-level=INFO --no-logcapture main/features/tests/user_profile.feature
+
+### Run test matching a tag, ex: @smoke tags 
+    behave --tags=@smoke --logging-level=INFO --no-logcapture main/features/tests/user_profile.feature
 
 ### Run test and export the result in a file
     It is convenient when you run a long suite of tests in which the stdout logs exceed your terminal buffer.
