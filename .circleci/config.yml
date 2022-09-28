@@ -72,12 +72,12 @@ jobs:
           name: "Run automated qwiki tests"
           command: |
             set -e
-            circleci tests glob "betle/features/api_20/*.feature" | circleci tests split > /tmp/tests-to-run
+            circleci tests glob "main/features/tests/*.feature" | circleci tests split > /tmp/tests-to-run
             behave $(cat /tmp/tests-to-run) --junit 
           no_output_timeout: "10m"
       - store_test_results:
           path: ~/project/reports
-      - generate-junit2html-report
+      - generate-html-report
       - store-artifacts
 #      - slack/notify:
 #          channel: # chanel
