@@ -1,0 +1,110 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "id",
+        "patient",
+        "practice",
+        "file",
+        "content_type",
+        "original_filename",
+        "file_size",
+        "last_updated",
+        "width",
+        "height",
+        "created_date"
+    ],
+    "properties": {
+        "id": {
+            "type": "integer",
+            "default": 0,
+            "title": "The id Schema",
+            "examples": [
+                140758911484188
+            ]
+        },
+        "patient": {
+            "type": "integer",
+            "default": 0,
+            "title": "The patient Schema",
+            "examples": [
+                140758910566401
+            ]
+        },
+        "practice": {
+            "type": "integer",
+            "default": 0,
+            "title": "The practice Schema",
+            "examples": [
+                140758906175492
+            ]
+        },
+        "file": {
+            "type": "string",
+            "default": "",
+            "title": "The file Schema",
+            "examples": [
+                "https://feature-rm-28957-as-an-api-integrat.dev.elationemr.com/api/2.0/patients/140758910566401/get_photo"
+            ]
+        },
+        "content_type": {
+            "type": "string",
+            "default": "",
+            "title": "The content_type Schema",
+            "examples": [
+                "image/png"
+            ]
+        },
+        "original_filename": {
+            "type": "string",
+            "default": "",
+            "title": "The original_filename Schema",
+            "examples": [
+                "ollololololo.jpg"
+            ]
+        },
+        "file_size": {
+            "type": "integer",
+            "default": 0,
+            "title": "The file_size Schema",
+            "examples": [
+                18453
+            ]
+        },
+        "last_updated": {
+            "type": "string",
+            "default": "",
+            "title": "The last_updated Schema",
+            "examples": [
+                "2022-08-02T15:48:51Z"
+            ]
+        },
+        "width": {
+            "type": "integer",
+            "default": 0,
+            "title": "The width Schema",
+            "examples": [
+                783
+            ]
+        },
+        "height": {
+            "type": "integer",
+            "default": 0,
+            "title": "The height Schema",
+            "examples": [
+                359
+            ]
+        },
+        "created_date": {
+            "type": "string",
+            "default": "",
+            "title": "The created_date Schema",
+            "examples": [
+                "2022-08-02T15:48:51Z"
+            ]
+        }
+    }
+}

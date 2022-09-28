@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Message DatatypesVersion="20170715" TransportVersion="20170715" TransactionDomain="SCRIPT" TransactionVersion="20170715" StructuresVersion="20170715" ECLVersion="20170715">
+    <Header>
+        <To Qualifier="D">12345679999999</To>
+        <From Qualifier="P">1234563</From>
+        <MessageID>888333</MessageID>
+        <RelatesToMessageID>991</RelatesToMessageID>
+        <SentTime>2022-05-18T07:45:30</SentTime>
+        <RxReferenceNumber>73737373</RxReferenceNumber>
+        <PrescriberOrderNumber>140760335974426</PrescriberOrderNumber>
+    </Header>
+    <Body>
+        <RxFill>
+            <FillStatus>
+                <PartiallyDispensed>
+                    <Note>tsedjfdslfjsfj</Note>
+                </PartiallyDispensed>
+            </FillStatus>
+            <Pharmacy>
+                <Identification>
+                    <NCPDPID>12345678901</NCPDPID>
+                    <NPI>SSPHARM1234</NPI>
+                </Identification>
+                <BusinessName>MCMOHRS CORNER PHARMACY</BusinessName>
+                <Address>
+                    <AddressLine1>123 THIRD ST</AddressLine1>
+                    <City>ST PAUL</City>
+                    <State>MN</State>
+                    <PostalCode>55101</PostalCode>
+                </Address>
+                <CommunicationNumbers>
+                    <PrimaryTelephone>
+                        <Number>6518952323</Number>
+                    </PrimaryTelephone>
+                </CommunicationNumbers>
+            </Pharmacy>
+            <Prescriber>
+                <NonVeterinarian>
+                    <Identification>
+                        <StateLicenseNumber>3334444</StateLicenseNumber>
+                        <NPI>1234567890</NPI>
+                    </Identification>
+                    <Name>
+                        <LastName>JONSON</LastName>
+                        <FirstName>TIM</FirstName>
+                    </Name>
+                    <CommunicationNumbers>
+                        <PrimaryTelephone>
+                            <Number>6518659191</Number>
+                        </PrimaryTelephone>
+                    </CommunicationNumbers>
+                </NonVeterinarian>
+            </Prescriber>
+            <Patient>
+                <HumanPatient>
+                    <Name>
+                        <LastName>Miller</LastName>
+                        <FirstName>Test.Gabriel</FirstName>
+                    </Name>
+                    <Gender>M</Gender>
+                    <DateOfBirth>
+                        <Date>1994-03-13</Date>
+                    </DateOfBirth>
+                    <Address>
+                        <AddressLine1>6095 Michael Prairie</AddressLine1>
+                        <City>Medinashire</City>
+                        <State>OR</State>
+                        <PostalCode>51650</PostalCode>
+                    </Address>
+                </HumanPatient>
+            </Patient>
+            <MedicationPrescribed>
+                <DrugDescription>LIPITOR 10MG TABLET</DrugDescription>
+                <DrugCoded>
+                    <ProductCode>
+                        <Code>00071015523</Code>
+                        <Qualifier>ND</Qualifier>
+                    </ProductCode>
+                </DrugCoded>
+                <Quantity>
+                    <Value>30</Value>
+                    <CodeListQualifier>38</CodeListQualifier>
+                    <QuantityUnitOfMeasure>
+                        <Code>C48542</Code>
+                    </QuantityUnitOfMeasure>
+                </Quantity>
+                <DaysSupply>30</DaysSupply>
+                <Directions>TAKE 1 TABLET BY MOUTH EVERYDAY</Directions>
+                <NumberOfRefills>0</NumberOfRefills>
+                <Substitutions>1</Substitutions>
+                <WrittenDate>
+                    <Date>2022-05-18T07:45:30</Date>
+                </WrittenDate>
+                <LastFillDate>
+                    <Date>2022-05-18T07:45:30</Date>
+                </LastFillDate>
+            </MedicationPrescribed>
+            <MedicationDispensed>
+                <DrugDescription>LIPITOR 10MG TABLET</DrugDescription>
+                <DrugCoded>
+                    <ProductCode>
+                        <Code>00071015523</Code>
+                        <Qualifier>ND</Qualifier>
+                    </ProductCode>
+                </DrugCoded>
+                <Quantity>
+                    <Value>30</Value>
+                    <CodeListQualifier>38</CodeListQualifier>
+                    <QuantityUnitOfMeasure>
+                        <Code>C48542</Code>
+                    </QuantityUnitOfMeasure>
+                </Quantity>
+                <DaysSupply>30</DaysSupply>
+                <Directions>TAKE 1 TABLET BY MOUTH EVERYDAY</Directions>
+                <NumberOfRefills>0</NumberOfRefills>
+                <Substitutions>1</Substitutions>
+                <WrittenDate>
+                    <Date>2022-05-18T07:45:30</Date>
+                </WrittenDate>
+                <LastFillDate>
+                    <Date>2022-05-05T07:45:30</Date>
+                </LastFillDate>
+            </MedicationDispensed>
+        </RxFill>
+    </Body>
+</Message>

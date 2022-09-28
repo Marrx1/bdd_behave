@@ -1,0 +1,15 @@
+behave
+requests
+Faker
+arrow
+hl7
+frozendict
+pytz
+python-dotenv
+lxml
+PyHamcrest
+dpath~=2.0.1
+six~=1.16.0
+tabulate~=0.8.9
+jsonschema~=3.2.0
+addict

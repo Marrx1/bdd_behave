@@ -1,0 +1,67 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "recently_viewed",
+    "type": "array",
+    "title": "Root Schema",
+    "items": {
+        "type": "object",
+        "title": "A Schema",
+        "required": [
+            "id",
+            "lastSeen",
+            "title",
+            "space",
+            "type",
+            "url"
+        ],
+        "properties": {
+            "id": {
+                "type": "integer",
+                "title": "The id Schema",
+                "examples": [
+                    68750099,
+                    643269343
+                ]
+            },
+            "lastSeen": {
+                "type": "integer",
+                "title": "The lastSeen Schema",
+                "examples": [
+                    1664266992000,
+                    1664266990000
+                ]
+            },
+            "title": {
+                "type": "string",
+                "title": "The title Schema",
+                "examples": [
+                    "NIX Wiki Home Home",
+                    "QD викинги. Контактная информация"
+                ]
+            },
+            "space": {
+                "type": "string",
+                "title": "The space Schema",
+                "examples": [
+                    "NIX Wiki Home",
+                    "Quality Department"
+                ]
+            },
+            "type": {
+                "type": "string",
+                "title": "The type Schema",
+                "examples": [
+                    "page"
+                ]
+            },
+            "url": {
+                "type": "string",
+                "title": "The url Schema",
+                "examples": [
+                    "/display/WIKI/NIX+Wiki+Home+Home",
+                    "/pages/viewpage.action?pageId=1999485"
+                ]
+            }
+        }
+    }
+}

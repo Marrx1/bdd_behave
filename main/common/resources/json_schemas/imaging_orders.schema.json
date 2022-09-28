@@ -1,0 +1,43 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "imaging_orders",
+    "type": "object",
+    "additionalProperties": false,
+    "title": "Root Schema",
+    "required": [
+        "count",
+        "next",
+        "previous",
+        "results"
+    ],
+    "properties": {
+        "count": {
+            "type": "integer",
+            "title": "The count Schema",
+            "examples": [
+                12
+            ]
+        },
+        "next": {
+            "type": ["string", "null"],
+            "title": "The next Schema",
+            "examples": [
+                null
+            ]
+        },
+        "previous": {
+            "type": ["string", "null"],
+            "title": "The previous Schema",
+            "examples": [
+                null
+            ]
+        },
+        "results": {
+            "type": "array",
+            "title": "The results Schema",
+            "items": {
+                "$ref": "imaging_order.schema.json"
+            }
+        }
+    }
+}

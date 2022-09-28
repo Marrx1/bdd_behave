@@ -1,0 +1,110 @@
+version: 2.1
+
+commands:
+  create-test-results-folder:
+    steps:
+      - run:
+          name: test result folders
+          command: |
+            mkdir /tmp/test_results;
+      - run:
+          name: working path generation
+          working_directory: /tmp
+          command: |
+            chown -R $USER:$USER /tmp/test_results/
+  generate-html-report:
+    steps:
+      - run:
+          name: "Generate HTML Report"
+          command: |
+            junit2html ~/project/reports/*.xml --report-matrix  ~/project/results/Consolidated-Test-Result.html
+            cp ~/project/results/* /tmp/test_results
+            cp ~/project/results/Consolidated-Test-Result.html /tmp/test_results
+          when: always
+  store-artifacts:
+    steps:
+      - store_artifacts:
+          name: Store consolidated test result and report
+          path: /tmp/test_results
+jobs:
+  branch_test:
+    parallelism: 2
+    docker:
+      - image: circleci/python
+    environment:
+      - HOST: "qwiki.nixsolutions.com"
+    steps:
+      - checkout
+      - create-test-results-folder
+      - run:
+          name: "Pip install dependencies"
+          command: |
+            pip install -r requirements.txt
+      - run:
+          name: "Run automated qwiki tests"
+          no_output_timeout: "20m"
+          command: |
+            set -e
+            circleci tests glob "main/features/tests/*.feature" | circleci tests split > /tmp/tests-to-run --split-by=timings
+            behave $(cat /tmp/tests-to-run) --junit 
+      - store_test_results:
+          path: ~/project/reports  
+      - generate-html-report
+      - store-artifacts
+#      - slack/notify:
+#          channel: # chanel id
+#          event: always
+
+  main_test:
+    parallelism: 2
+    docker:
+      - image: circleci/python
+    environment:
+      - HOST: "qwiki.nixsolutions.com"
+    steps:
+      - checkout
+      - create-test-results-folder
+      - run:
+          name: "Pip install dependencies"
+          command: |
+            pip install -r requirements.txt
+      - run:
+          name: "Run automated qwiki tests"
+          command: |
+            set -e
+            circleci tests glob "betle/features/api_20/*.feature" | circleci tests split > /tmp/tests-to-run
+            behave $(cat /tmp/tests-to-run) --junit 
+          no_output_timeout: "10m"
+      - store_test_results:
+          path: ~/project/reports
+      - generate-junit2html-report
+      - store-artifacts
+#      - slack/notify:
+#          channel: # chanel
+#          event: always
+
+
+workflows:
+  test-build-and-push:
+    jobs:
+      - branch_test:
+         filters:
+           branches:
+             ignore: master
+      - main_test:
+         filters:
+           branches:
+             only: master
+
+  nightly-tests:
+    triggers:
+      - schedule:
+          cron: "0 10 * * *"
+          filters:
+            branches:
+              only: master
+    jobs:
+      - main_test:
+          filters:
+            branches:
+              only: master

@@ -1,0 +1,237 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "$id": "imaging_order",
+    "type": "object",
+    "additionalProperties": false,
+    "title": "Root Schema",
+    "required": [
+        "ancillary_company",
+        "ccs",
+        "chart_date",
+        "clinical_reason",
+        "confidential",
+        "created_date",
+        "deleted_date",
+        "document_date",
+        "follow_up_method",
+        "icd10_codes",
+        "id",
+        "patient",
+        "practice",
+        "prescribing_user",
+        "signed_date",
+        "imaging_center",
+        "statmethod",
+        "tests"
+    ],
+    "properties": {
+        "ancillary_company": {
+            "type": "integer",
+            "title": "The ancillary_company Schema",
+            "examples": [
+                140759041310728
+            ]
+        },
+        "ccs": {
+            "type": "array",
+            "title": "The ccs Schema",
+            "items": {
+                "type": "integer",
+                "title": "A Schema",
+                "examples": [
+                    140759041507330
+                ]
+            }
+        },
+        "chart_date": {
+            "type": "string",
+            "title": "The chart_date Schema",
+            "examples": [
+                "2022-08-11T13:33:36Z"
+            ]
+        },
+        "clinical_reason": {
+            "type": "string",
+            "title": "The clinical_reason Schema",
+            "examples": [
+                "Auto test reason: hVhXBNyVDb"
+            ]
+        },
+        "confidential": {
+            "type": "boolean",
+            "title": "The confidential Schema",
+            "examples": [
+                false
+            ]
+        },
+        "created_date": {
+            "type": "string",
+            "title": "The created_date Schema",
+            "examples": [
+                "2022-08-11T10:59:09Z"
+            ]
+        },
+        "deleted_date": {
+            "type": ["string", "null"],
+            "title": "The deleted_date Schema",
+            "examples": [
+                null
+            ]
+        },
+        "document_date": {
+            "type": "string",
+            "title": "The document_date Schema",
+            "examples": [
+                "2022-08-11T13:33:36Z"
+            ]
+        },
+        "follow_up_method": {
+            "type": ["string", "null"],
+            "title": "The follow_up_method Schema",
+            "examples": [
+                null
+            ]
+        },
+        "icd10_codes": {
+            "type": "array",
+            "title": "The icd10_codes Schema",
+            "items": {
+                "type": "object",
+                "title": "A Schema",
+                "required": [
+                    "code",
+                    "description"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "title": "The code Schema",
+                        "examples": [
+                            "I25.720"
+                        ]
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "The description Schema",
+                        "examples": [
+                            "Athscl autologous artery CABG w unstable angina pectoris"
+                        ]
+                    }
+                },
+                "examples": [{
+                    "code": "I25.720",
+                    "description": "Athscl autologous artery CABG w unstable angina pectoris"
+                }]
+            }
+        },
+        "id": {
+            "type": "integer",
+            "title": "The id Schema",
+            "examples": [
+                140759042097180
+            ]
+        },
+        "patient": {
+            "type": "integer",
+            "title": "The patient Schema",
+            "examples": [
+                140759040917505
+            ]
+        },
+        "practice": {
+            "type": "integer",
+            "title": "The practice Schema",
+            "examples": [
+                140759036526596
+            ]
+        },
+        "prescribing_user": {
+            "type": "integer",
+            "title": "The prescribing_user Schema",
+            "examples": [
+                256
+            ]
+        },
+        "signed_date": {
+            "type": ["string", "null"],
+            "title": "The signed_date Schema",
+            "examples": [
+                null
+            ]
+        },
+        "imaging_center": {
+            "type": ["null", "integer"],
+            "title": "The imaging_center Schema",
+            "examples": [
+                140759041376262
+            ]
+        },
+        "statmethod": {
+            "type": ["string", "null"],
+            "title": "The statmethod Schema",
+            "examples": [
+                null
+            ]
+        },
+        "tests": {
+            "type": "array",
+            "title": "The tests Schema",
+            "items": {
+                "type": "object",
+                "title": "A Schema",
+                "required": [
+                    "code",
+                    "created_date",
+                    "deleted_date",
+                    "id",
+                    "name",
+                    "practice"
+                ],
+                "properties": {
+                    "code": {
+                        "type": ["string", "null"],
+                        "title": "The code Schema",
+                        "examples": [
+                            null
+                        ]
+                    },
+                    "created_date": {
+                        "type": "string",
+                        "title": "The created_date Schema",
+                        "examples": [
+                            "2022-08-11T10:33:45Z"
+                        ]
+                    },
+                    "deleted_date": {
+                        "type": ["string", "null"],
+                        "title": "The deleted_date Schema",
+                        "examples": [
+                            null
+                        ]
+                    },
+                    "id": {
+                        "type": "integer",
+                        "title": "The id Schema",
+                        "examples": [
+                            140759041638455
+                        ]
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "The name Schema",
+                        "examples": [
+                            "NOAeOxQjda"
+                        ]
+                    },
+                    "practice": {
+                        "type": "integer",
+                        "title": "The practice Schema",
+                        "examples": [
+                            140759036526596
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
