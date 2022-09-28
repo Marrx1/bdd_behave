@@ -17,7 +17,7 @@ commands:
       - run:
           name: "Generate HTML Report"
           command: |
-            python -m junit2html ~/project/reports/*.xml --report-matrix  ~/project/results/Consolidated-Test-Result.html
+            junit2html ~/project/reports/*.xml --report-matrix  ~/project/results/Consolidated-Test-Result.html
             cp ~/project/results/* /tmp/test_results
             cp ~/project/results/Consolidated-Test-Result.html /tmp/test_results
           when: always
