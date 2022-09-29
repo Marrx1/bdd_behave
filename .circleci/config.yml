@@ -43,7 +43,7 @@ jobs:
           no_output_timeout: "20m"
           command: |
             set -e
-            circleci tests glob "main/features/**/*.feature" | circleci tests split > /tmp/tests-to-run --split-by=timings
+            circleci tests glob "main/features/**/*.feature" "main/features/tests/*.feature" | circleci tests split > /tmp/tests-to-run --split-by=timings
             behave $(cat /tmp/tests-to-run) --junit 
       - store_test_results:
           path: ~/project/reports  
@@ -68,7 +68,7 @@ jobs:
           name: "Run automated qwiki tests"
           command: |
             set -e
-            circleci tests glob "main/features/**/*.feature" | circleci tests split > /tmp/tests-to-run
+            circleci tests glob "main/features/**/*.feature" "main/features/tests/*.feature" | circleci tests split > /tmp/tests-to-run
             behave $(cat /tmp/tests-to-run) --junit 
           no_output_timeout: "10m"
       - store_test_results:
