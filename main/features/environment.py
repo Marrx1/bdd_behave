@@ -4,11 +4,11 @@ from behave.fixture import use_fixture_by_tag
 from behave.model_core import Status
 
 from main.common.matchers.common_matchers import contains_common_error_message
-from main.features.fixtures import get_user_account
+from main.features.fixtures import get_user_account_fixture
 
 
 fixtures_by_tag = {
-    "fixture.get_user_account": get_user_account
+    "fixture.get_user_account": get_user_account_fixture
 }
 
 

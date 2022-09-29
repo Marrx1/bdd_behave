@@ -1,17 +1,15 @@
-import os
-import requests
-from dotenv import load_dotenv
-from main.common.logger import api_logger
 
-load_dotenv()
+import requests
+from main.clients import *
+from main.common.logger import api_logger
 
 
 class UIClient:
-    def __init__(self):
-        self.host = os.environ.get("HOST")
-        self.username = os.environ.get("USER_NAME")
-        self._password = os.environ.get("USER_PASSWORD")
-        self.scheme = os.environ.get("SCHEMA", "https")
+    def __init__(self, username: str = None, password: str = None):
+        self.host = HOST
+        self.username = username or USER_NAME
+        self._password = password or USER_PASSWORD
+        self.scheme = SCHEMA
         self._session = requests.session()
         self._session.headers = self._set_headers()
 

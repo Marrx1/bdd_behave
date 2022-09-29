@@ -2,11 +2,14 @@ import re
 import random
 from time import sleep
 
+
 from behave.runner import Context
+from lxml import etree
 from requests.models import Response
 from hamcrest import assert_that, is_, equal_to
 from pkg_resources import resource_string
 
+from main.clients.clients import UIClient
 from main.common.constants.qwiki_page_map import pages
 from main.common.constants.schema_map import RECENTLY_VIEWED_SCHEMA
 from main.common.constants.test_file_map import RESOURCES_TEST_FILES
@@ -22,6 +25,18 @@ def post_user_profile_photo(context: Context, file_name: str) -> Response:
                 f"data:{data.get('content_type')};base64,{data.get('base64_content')}"}
     response = context.client.post(path, json=img_data)
     return response
+
+
+def get_user_account(context: Context) -> None:
+    context.client = UIClient()
+    response = context.client.post("dologin.action")
+    response.raise_for_status()
+    page = etree.HTML(response.text)
+    context.user_key = page.xpath("//meta[@name='ajs-remote-user-key']")[0].get("content")
+    context.username = page.xpath("//meta[@name='ajs-current-user-fullname']")[0].get("content")
+    licensed_access = page.xpath("//meta[@name='ajs-remote-user-has-licensed-access']")[0].get("content")
+    context.has_licensed_access = True if licensed_access == "true" else False
+    context.fixture_log.info(f"logged-in as: {context.username}")
 
 
 def get_user_profile_photo(context: Context, attachment_id: int) -> Response:
