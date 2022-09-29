@@ -1,17 +1,38 @@
+# Getting started with CircleCI config https://circleci.com/docs/config-intro
+# https://circleci.com/docs/introduction-to-yaml-configurations
+
+# This indicates the version of the CircleCI platform you are using. 2.1 is the most recent version at the moment.
 version: 2.1
 
+# define the list of custom commands
+# A command definition defines a sequence of steps as a map to be executed in a job,
+# enabling you to reuse a single command definition across multiple jobs
+# https://circleci.com/docs/configuration-reference#commands-requires-version-21
+
 commands:
+  # define custom command to create a folder on the cicleci server
   create-test-results-folder:
+    # The steps collection is a list of run directives.
+    #  Each run directive is executed in the order in which it is declared.
     steps:
       - run:
+          # just name of the run process
           name: test result folders
+          # command to execute
+          # in this case create directory on the circleci server to store tests runs
           command: |
             mkdir /tmp/test_results;
       - run:
           name: working path generation
+          # working_directory  In which directory to run the steps. Will be interpreted as an absolute path.
+          # Default: ~/project (where project is a literal string, not the name of your specific project)
           working_directory: /tmp
+          # The chown command changes user ownership of a file, directory, or link in Linux.
+          # Every file is associated with an owning user or group.
+          # Here we set up owning to the current circleci User
           command: |
             chown -R $USER:$USER /tmp/test_results/
+  # define custom command to generate html report from test output
   generate-html-report:
     steps:
       - run:
@@ -21,38 +42,80 @@ commands:
             cp ~/project/results/* /tmp/test_results
             cp ~/project/results/Consolidated-Test-Result.html /tmp/test_results
           when: always
+
+  # define custom command to store any generated report to specific folder,
+  # which should be created and assigned to user at this step
   store-artifacts:
     steps:
+      # special step to store artifacts
+      # https://circleci.com/docs/configuration-reference#storeartifacts
       - store_artifacts:
           name: Store consolidated test result and report
           path: /tmp/test_results
+
+# The jobs level contains a collection of children,
+# representing your jobs. You specify the names for these jobs by himself, for example, build, test, deploy.
 jobs:
+  # name job
+  # configuration for test which will be running on specific branches ie, feature branches, develop etc
   branch_test:
+    # set up parallels test runs see https://circleci.com/docs/parallelism-faster-jobs
     parallelism: 1
+    # This specifies that you are using a Docker image.
+    # In this case it's circleci recommended image with python
     docker:
+      # https://hub.docker.com/r/circleci/python
       - image: circleci/python
+    # The steps collection is a list of run directives.
+    #  Each run directive is executed in the order in which it is declared.
     steps:
+      # https://circleci.com/docs/configuration-reference#checkout
+      # in simple word it's a git clone of your code from your VCS into your primary container or VM
       - checkout
+      # calling the custom command described above to create a folder to store tests output
       - create-test-results-folder
+      # Install project dependencies
       - run:
+          # name of the run will be printed as pipline build steps
           name: "Pip install dependencies"
+          # commands to execute in the current run
           command: |
             pip install -r requirements.txt
+      # Here project test will be running
       - run:
           name: "Run automated qwiki tests"
+          # CircleCI has a built-in 10 minute no-output timeout by default.
+          # This means that if it has been 10 minutes since the last output, the build will be canceled and stopped.
+          # we can increase this behaviour by adding  "no_output_timeout" option
+          # see https://support.circleci.com/hc/en-us/articles/360007188574-Build-has-Hit-Timeout-Limit
           no_output_timeout: "20m"
+          # set -e
+          # Linux shell command that displays and sets the names and values of shell and Linux environment variables
+
+          # circleci tests glob
+          # automatic test allocation across your containers
+          # https://circleci.com/docs/parallelism-faster-jobs#using-the-circleci-cli-to-split-tests
+
+          # behave $(cat /tmp/tests-to-run) --junit
+          # run all collected in previous step tests
+
           command: |
             set -e
             circleci tests glob "main/features/**/*.feature" "main/features/tests/*.feature" | circleci tests split > /tmp/tests-to-run --split-by=timings
-            behave $(cat /tmp/tests-to-run) --junit 
+            behave $(cat /tmp/tests-to-run) --junit
+      # declare path to store tests output
       - store_test_results:
-          path: ~/project/reports  
+          path: ~/project/reports
+      # calling the custom command described above to generate test result html report based on the stored test output
       - generate-html-report
+      # calling the custom command described above to store all generated reports on the cicleci
       - store-artifacts
 #      - slack/notify:
 #          channel: # chanel id
 #          event: always
 
+  # name job
+  # configuration for test which will be running on the master branch
   main_test:
     parallelism: 1
     docker:
@@ -80,22 +143,34 @@ jobs:
 #          event: always
 
 
+# https://circleci.com/docs/workflows
+# A workflow is a set of rules for defining a collection of jobs and their run order
 workflows:
+  # setup tests to run on each push
   test-build-and-push:
     jobs:
+      # name of the job declared above
       - branch_test:
+         # The workflow will be run on any branches excluding master
          filters:
            branches:
              ignore: master
+      # name of the job declared above
       - main_test:
+         # The workflow will be run on master branch only
          filters:
            branches:
              only: master
 
+  # setup tests to run each night
   nightly-tests:
+    # https://circleci.com/docs/configuration-reference#triggers
+    # set up triggers to run tests
     triggers:
       - schedule:
+          # https://en.wikipedia.org/wiki/Cron#CRON_expression
           cron: "0 10 * * *"
+          # The workflow will be run on master branch only
           filters:
             branches:
               only: master

@@ -1,5 +1,6 @@
 # BDD Behave Test Examples
 Ready for CI/CD with circleci, see .circleci/config.yaml
+and see https://circleci.com/docs/github-integration
 
 ## Clone the repo
 
