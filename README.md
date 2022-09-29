@@ -16,7 +16,7 @@ Create a file called `.env` in the root of repo add envvars for, at least:
 
     USER_NAME=<user_name>
     USER_PASSWORD=<pass>
-    HOST=<host>  for example: test.company.com
+    HOST=<host>  for example: qwiki.company.com use real qwiki host here
 
 Available envvars include:
     PORT=443
