@@ -28,7 +28,7 @@ commands:
           path: /tmp/test_results
 jobs:
   branch_test:
-    parallelism: 2
+    parallelism: 1
     docker:
       - image: circleci/python
     steps:
@@ -54,7 +54,7 @@ jobs:
 #          event: always
 
   main_test:
-    parallelism: 2
+    parallelism: 1
     docker:
       - image: circleci/python
     steps:
