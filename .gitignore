@@ -1,10 +1,9 @@
 *~
 *.egg-info
-*.tox
 *.pyc
 *.DS_Store
 .python-version
-betle_env
+bdd_env
 venv
 .*.sw?
 .idea/

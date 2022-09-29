@@ -8,9 +8,9 @@ load_dotenv()
 
 class UIClient:
     def __init__(self):
-        self.host = os.environ.get("HOST", "qwiki.nixsolutions.com")
-        self.username = os.environ.get("USER_NAME", None)
-        self._password = os.environ.get("USER_PASSWORD", None)
+        self.host = os.environ.get("HOST")
+        self.username = os.environ.get("USER_NAME")
+        self._password = os.environ.get("USER_PASSWORD")
         self.scheme = os.environ.get("SCHEMA", "https")
         self._session = requests.session()
         self._session.headers = self._set_headers()

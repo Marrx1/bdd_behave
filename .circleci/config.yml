@@ -31,8 +31,6 @@ jobs:
     parallelism: 2
     docker:
       - image: circleci/python
-    environment:
-      - HOST: "qwiki.nixsolutions.com"
     steps:
       - checkout
       - create-test-results-folder
@@ -59,8 +57,6 @@ jobs:
     parallelism: 2
     docker:
       - image: circleci/python
-    environment:
-      - HOST: "qwiki.nixsolutions.com"
     steps:
       - checkout
       - create-test-results-folder
