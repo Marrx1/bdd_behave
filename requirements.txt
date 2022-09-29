@@ -8,9 +8,9 @@ pytz
 python-dotenv
 lxml
 PyHamcrest
-dpath~=2.0.1
-six~=1.16.0
-tabulate~=0.8.9
-jsonschema~=3.2.0
+dpath
+six
+tabulate
+jsonschema
 addict
 junit2html
