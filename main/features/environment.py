@@ -13,7 +13,7 @@ fixtures_by_tag = {
 
 
 def before_all(context):
-    context.config.setup_logging(logging.INFO)
+    context.config.setup_logging()
     context.fixture_log = logging.getLogger("fixture")
     context.api_error_matcher = contains_common_error_message
 

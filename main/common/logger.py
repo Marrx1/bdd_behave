@@ -12,7 +12,6 @@ log.setLevel(logging.INFO)
 
 # set logger for debugging info which will show with params --logging-level=DEBUG --no-logcapture
 log_develop = logging.getLogger("api_dev_logs")
-log_develop.setLevel(logging.DEBUG)
 
 
 def api_logger(func):
