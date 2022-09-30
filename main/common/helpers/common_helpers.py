@@ -39,7 +39,7 @@ class SchemaRefResolver(RefResolver):
         return schema
 
 
-def validate_json_schema(response: Response, schema: json, resolver: dict):
+def validate_json_schema(response: Response, schema: json, resolver: SchemaRefResolver):
     validate(response.json(), json.loads(schema), resolver=resolver)
 
 
@@ -98,20 +98,6 @@ def to_fixed_precision(number, precision):
         return f"{number:.{precision}f}"
     else:
         return number
-
-
-def generate_documenting_personnel(context, physician_choose):
-    physician = physician_choose
-    if physician_choose == "prescribing_physician":
-        physician = context.account.physician["id"]
-    elif physician_choose == "other_physician":
-        # todo: find the way get physicians
-        physician = 131074  # hardcoded Michaela Quinn
-    elif physician_choose == "invalid_physician":
-        physician = context.account.physician["id"] + random.randint(100, 200)
-    elif physician_choose == "empty":
-        physician = None
-    return physician
 
 
 def get_formatted_date_by_alias(
@@ -346,11 +332,6 @@ def apply_filter_to_response(full_response_list: list, **filters: dict) -> list:
     return filter_result
 
 
-def simplify_tag_object(response_json: dict, fields_to_leave: list):
-    for tag in response_json["tags"]:
-        [tag.pop(x, None) for x in tag.copy() if x not in fields_to_leave]
-
-
 def remove_keys_in_nested_dict(initial_dict: dict, key_to_remove: list):
     """Use for case where we need to get-rid of some keys which we can't predict
     or any other cases where we need to remove keys regardless of how deeply it nested"""
@@ -391,30 +372,4 @@ def get_content_sha256(content):
         sha256.update(content)
         return sha256.hexdigest()
     return
-
-
-# Please do not remove this commented func. it can be useful in future
-#  when we need to re-generate png file representation if Pillow version changes on the dev
-# def convert_to_png(local_path: str,
-#                    width: int = None,
-#                    height: int = None,
-#                    file_name: str = None) -> None:
-#    """Use this func to convert original images to png in patient photo feature
-#     to update parametrization files with correct data if dev pillow version changes"""
-#     # install Pillow same version as dev (for now 31.08.2022 it's Pillow~=8.3.2)
-#     from PIL import Image, ImageOps
-#     # Please note, output file size strongly depends on Pillow (PIL) lib version
-#     # Currently on the dev we use 8.3.2 to keep tests on the same page with dev use same version
-#     img = Image.open(local_path)
-#     if width and height:
-#         # apply crop to fit
-#         img = ImageOps.fit(
-#             img, (int(width), int(height)), Image.ANTIALIAS, 0, (0.5, 0.5)
-#         )
-#     if img.mode not in ("RGB", "RGBA", "1", "P"):
-#         img = img.convert("RGB")
-#     # save to temp directory
-#     img.save(f"tmp/{file_name.replace('.', '_')}.png")
-#     img.close()
-
 

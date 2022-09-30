@@ -8,7 +8,6 @@ from main.common.helpers.nodes import (
     get_medication_entity_error_message,
     get_node_is_absent_error_message,
     get_node,
-    get_results,
     get_ids,
     get_content_error_message,
     get_deleted_date,

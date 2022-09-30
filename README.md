@@ -20,12 +20,17 @@ Create a file called `.env` in the root of repo add envvars for, at least:
     HOST=<host>  for example: qwiki.company.com use real qwiki host here
 
 Available envvars include:
+
     PORT=443
     SCHEME=https
 
-### Run All tests 
-    behave main/features/tests
+### Example of PuCharm setting
 
+### Run All tests 
+    behave main/features
+
+### Run a specific test suit
+    behave main/features/tests
 
 ### Run a specific feature
 	behave main/features/tests/user_profile.feature
